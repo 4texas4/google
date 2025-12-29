@@ -58,9 +58,11 @@ async function loadGoogle(url) {
   frame.go(url);
 }
 
-// Automatically load Google on page load
+// Automatically load site from URL query, default to Google
 window.addEventListener("DOMContentLoaded", () => {
-  loadGoogle("https://www.google.com").catch(console.error);
+  const query = window.location.search.substring(1); // remove the "?"
+  const urlToLoad = query ? query : "https://www.google.com";
+  loadGoogle(urlToLoad).catch(console.error);
 });
 
 // Keep the form functional for manual searches
